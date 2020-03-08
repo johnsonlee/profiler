@@ -1,0 +1,29 @@
+import static org.gradle.kotlin.dsl.KotlinDependencyExtensionsKt.embeddedKotlinVersion
+
+buildscript {
+    ext.kotlin_version = embeddedKotlinVersion
+}
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version "$kotlin_version"
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'application'
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    implementation platform('org.jetbrains.kotlin:kotlin-bom')
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+    implementation 'com.didiglobal.booster:booster-transform-util:1.5.0-SNAPSHOT'
+    implementation 'com.didiglobal.booster:booster-transform-asm:1.5.0-SNAPSHOT'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit'
+}
+
+application {
+    mainClassName = "io.johnsonlee.booster.profiler.ProfilerKt"
+}
